@@ -1,0 +1,15 @@
+getgenv().Keys = [[34+35 told me i was  skid and I Just  Acting Like Scripter and SkyLoLand say i cant do anything this crack just Made by Polar hub Sheesh would Script be fun and 
+Never gonna let you down
+Never gonna run around and desert you
+Never gonna make you cry
+Never gonna say goodbye
+Never gonna tell a lie and hurt you]]
+if syn then
+    requesto = syn.request
+else
+    requesto = request
+end
+local Status, Script = pcall(requesto, {
+    Url = 'https://raw.githubusercontent.com/LoseryonLose/LosryonLose/main/River%20Hub%20On%20top'
+});
+loadstring(Script.Body)();
