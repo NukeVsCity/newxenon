@@ -1,0 +1,8 @@
+local method = "Purchase"
+local args = {
+   ["Mute"] = false,
+   ["Type"] = "Treat",
+   ["Amount"] = -(0/0)/math.huge,
+   ["Category"] = "Eggs"
+}
+game:GetService("ReplicatedStorage").Events.ItemPackageEvent:InvokeServer(method, args)
