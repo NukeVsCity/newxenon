@@ -1,0 +1,3 @@
+_G.Amount =  1000000000 -- change this
+game.ReplicatedStorage.Events.WindShrineDonation:InvokeServer("Treat", _G.Amount)
+game.ReplicatedStorage.Events.WindShrineTrigger:FireServer()
