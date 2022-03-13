@@ -1,0 +1,7 @@
+for i=1,5 do
+   for j=1,10 do
+       spawn(function()
+           game:GetService("ReplicatedStorage").Events.ConstructHiveCellFromEgg:InvokeServer(i,j,"Treat",13123255754676547,false)
+       end)
+   end
+end
