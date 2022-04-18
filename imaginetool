@@ -36,7 +36,7 @@ do
     local oldnidx = mt.__newindex;
     setreadonly(mt, false);
     mt.__newindex = newcclosure(function(self, k, v)
-        if (k == 'Text' and v == 'ShinyTool |') then
+        if (k == 'Text' and v == 'ShinyTool | Pet Simulator X | Version: 1.6.0') then
             v = "ImagineTool"
         end;
         return oldnidx(self, k, v)
