@@ -1,0 +1,78 @@
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/AikaV3rm/UiLib/master/Lib.lua')))()
+
+local w = library:CreateWindow("Mining Simulator 2") -- Creates the window
+
+local b = w:CreateFolder("Mining") -- Creates the folder(U will put here your buttons,etc)
+
+_G.On = nil
+
+--main scripts below --
+
+local function SellBlocks()
+   game:GetService("ReplicatedStorage").Events.Teleport:FireServer("SurfaceSell")
+end
+
+function breakblock(pos)
+   local args = {
+       [1] = pos
+   }
+
+   game:GetService("ReplicatedStorage").Events.MineBlock:FireServer(unpack(args))
+end
+
+local Mod = require(game:GetService("ReplicatedStorage").SharedModules.ChunkUtil)
+
+function getPartBelow()
+   local Character = game.Players.LocalPlayer.Character
+   local Foot = Character.RightFoot
+   local RayOrigin = Foot.Position
+   local RayDirection = Vector3.new(0, -1, 0)
+
+   local Params = RaycastParams.new()
+   Params.FilterType = Enum.RaycastFilterType.Blacklist
+   Params.FilterDescendantsInstances = { Character }
+
+   local Result = workspace:Raycast(RayOrigin, RayDirection, Params)
+
+   if Result then
+       local RayInstance = Result.Instance
+       print("Instance hit: " .. tostring(RayInstance))
+       return RayInstance
+   end
+
+   return nil
+end
+
+b:Toggle("Auto Mine", function(bool)
+   spawn(function()
+       shared.toggle = bool
+       if shared.toggle then
+           _G.On = true
+       else
+           _G.On = false
+       end
+
+       while true do
+           if _G.On then
+               local closest = getPartBelow()
+
+               if closest ~= nil then
+                   local Pos = closest.Position
+
+                   local NewPos = Mod.worldToCell(Pos)
+
+                   task.spawn(function()
+                       breakblock(NewPos)
+                   end)
+               end
+           end
+           task.wait()
+       end
+   end)
+end)
+
+b:Button("Sell Blocks", function()
+   spawn(function()
+       SellBlocks()
+   end)
+end)
